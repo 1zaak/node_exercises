@@ -33,7 +33,7 @@ var genAlphanumeric = function(limit) {
 }
 
 var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAlphanumeric) {
-  var limit = 1000
+  var limit = 100
   var randomizers = [genAlphabeticString, genRealNumber, genInteger, genAlphanumeric]
   var finalOutput = []
   console.log('generating main file..')
