@@ -33,14 +33,14 @@ var genAlphanumeric = function(limit) {
 }
 
 var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAlphanumeric) {
-  var limit = 100
+  var limit = 100 // 1000000 = 10 MB
   var randomizers = [genAlphabeticString, genRealNumber, genInteger, genAlphanumeric]
   var finalOutput = []
   console.log('generating main file..')
 
     for (i = limit; i >= 0; i--) {
       var randomize = Random.integer(0, 3)
-      var item = randomizers[randomize](randomize)
+      var item = randomizers[randomize](limit)
       console.log('randomizing item..', i, item)
       finalOutput.push(item)
     }
