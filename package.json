@@ -9,8 +9,7 @@
   },
   "author": "izaak",
   "license": "ISC",
-  "dependencies": {
-    "lodash": "^4.16.2",
+  "dependencies": {    
     "random-js": "^1.0.8",
     "randomstring": "^1.1.5"
   }
