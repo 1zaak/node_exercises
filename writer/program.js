@@ -42,7 +42,9 @@ var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAl
       var randomize = Random.integer(0, 3)
       var item = randomizers[randomize](limit)
       console.log('randomizing item..', i, item)
-      finalOutput.push(item)
+      while (finalOutput.toString().length <= 1000000) {
+        finalOutput.push(item)
+      }
     }
 
     console.log('finalOutput length:',finalOutput.toString().length)
