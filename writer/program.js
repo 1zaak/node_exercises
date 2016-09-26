@@ -1,54 +1,55 @@
 var fs = require('fs')
-var util = require('util')
 var randomstring = require('randomstring')
 var Random = require('random-js')()
 
-var randomString = randomstring.generate()
-
-var getRemainingFilesize = function(){
-  // Return filesize in B
-  var stats = fs.statSync('./reader/example.txt')
-  return 1000001.0 - stats["size"] //uncomment for MB / 1000000.0
-}
-
-var getCurrentContents = function(){
-  fs.readFile('./output/output.txt', 'utf8', function(err, content){
-    if (err) throw console.log('Error reading current file', err)
-    return content
-  })
-}
-
-var genAlphabeticString = function(){
+var genAlphabeticString = function(limit) {
   return randomstring.generate({
-    // to generate limited length based on filesize
+    // to generate limited length based on remaining filesize
+    length: limit,
     charset: 'alphabetic'
   });
 }
 
-var genRealNumber = function(){
-  return Random.real(-11020, 203023)
+var genRealNumber = function(limit) {
+  return Random.real(-limit, limit)
 }
 
-var genIntegers = function(){
-  return Random.integer(1, 2133212323)
+var genInteger = function(limit) {
+  return Random.integer(1, limit)
 }
 
-var genAlphanumeric = function(){
-  // var spaceBefore = for (i=0; i<=)
-  return randomstring.generate({
-    // to generate limited length based on filesize
+var genAlphanumeric = function(limit) {
+  // For generating random amount of spaces before and after
+  String.prototype.repeat = function() {
+    return Array(10 + 1).join(this);
+  };
+  var randSpace = " ".repeat()
+  var alphanumeric = randomstring.generate({
+    // to generate limited length based on remaining filesize
+    length: limit,
     charset: 'alphanumeric'
   });
+  return randSpace + alphanumeric + randSpace
 }
 
-var randAlphabeticString = genAlphabeticString()
-var randRealNumber = genRealNumber()
-var randInteger = genIntegers()
-var randAlphanumeric = genAlphanumeric()
+var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAlphanumeric) {
+  var limit = 1000
+  var randomizers = [genAlphabeticString, genRealNumber, genInteger, genAlphanumeric]
+  var finalOutput = []
+  console.log('generating main file..')
 
-var fileSizeInMegaBytes = getRemainingFilesize()
+    for (i = limit; i >= 0; i--) {
+      var randomize = Random.integer(0, 3)
+      var item = randomizers[randomize](randomize)
+      console.log('randomizing item..', i, item)
+      finalOutput.push(item)
+    }
 
-fs.writeFile('./output/output.txt', fileSizeInMegaBytes, function(err, content){
-  if (err) throw console.error('Error writing output', err);
-  console.log('It\'s saved Izaak!')
-})
+    console.log('finalOutput length:',finalOutput.toString().length)
+    fs.writeFile('./output/output.txt', finalOutput, function(err, content) {
+      if (err) throw console.error('Error writing output', err);
+      console.log('It\'s saved!')
+    })
+}
+
+genMainFile(genAlphabeticString, genRealNumber, genInteger, genAlphanumeric)
