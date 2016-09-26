@@ -1,0 +1,16 @@
+{
+  "name": "writer",
+  "version": "0.0.1",
+  "description": "Write a program that will generate four(4) types of printable random ",
+  "main": "./writer/program.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node ./writer/program.js"
+  },
+  "author": "izaak",
+  "license": "ISC",
+  "dependencies": {
+    "random-js": "^1.0.8",
+    "randomstring": "^1.1.5"
+  }
+}
