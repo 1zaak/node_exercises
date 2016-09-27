@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm test",
     "start": "node ./writer/program.js",
-    "read": "node ./reader/program.js"
+    "reader": "node ./reader/program.js"
   },
   "author": "izaak",
   "license": "ISC",

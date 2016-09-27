@@ -3,12 +3,11 @@ var randomstring = require('randomstring')
 var Random = require('random-js')()
 var bytes = require('bytes');
 
-var OUTPUT_SIZE = 1024 // 10485760 (10MB), 1048576 (1MB), 1024 (1KB)
+var OUTPUT_SIZE = 10485760 // 10485760 (10MB), 1048576 (1MB), 1024 (1KB)
 
 // Random alphabetic generator
 var genAlphabeticString = function(limit) {
   return randomstring.generate({
-    // to generate limited length based on remaining filesize
     length: limit,
     charset: 'alphabetic'
   });
@@ -37,14 +36,12 @@ var genAlphanumeric = function(limit) {
   var randSpaceBefore = " ".repeat()
   var randSpaceAfter = " ".repeat()
   var alphanumeric = randomstring.generate({
-    // to generate limited length based on remaining filesize
+    // to generate limited length based on spaces created
     length: limit - (randSpaceBefore.length + randSpaceAfter.length),
     charset: 'alphanumeric'
   });
 
-  // limit length
-  alphanumeric = randSpaceBefore + alphanumeric + randSpaceAfter
-  return alphanumeric
+  return randSpaceBefore + alphanumeric + randSpaceAfter
 }
 
 // Generate main output
