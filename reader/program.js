@@ -4,6 +4,7 @@ var _ = require('lodash')
 var contentArr = []
 var evaluatedArr = []
 
+// evaluator object to chain the methods
 var evaluator = {
   type: null,
   evaluatee: null,
@@ -69,14 +70,12 @@ var evaluator = {
 
 var genResultFile = function(isAlphabeticString, isAlphaNumeric, isRealNumber, isInteger) {}
 
-
 fs.readFile('./output/output.txt', 'utf8', function(err, content) {
   if (err) throw console.error('Error writing output', err);
 
   contentArr = content.split(',')
 
   _.forEach(contentArr, function(item) {
-
     var result = evaluator.isAlphaNumeric(item).isAlphabeticString().isRealNumber().isInteger()
     evaluatedArr.push(result.result)
   })
