@@ -6,7 +6,7 @@ Programming Challenge 101
 objects and store them in a single file, each object will be separated by
 a ",".  These are the 4 objects: alphabetical strings, real numbers,
 integers, alphanumerics. The alphanumerics should contain a random
-number of spaces before and after it (not exceeding 10Â spaces).
+number of spaces before and after it (not exceeding 10 spaces).
 The output should be 10MB in size.
 
 > Sample extracted output :
@@ -32,5 +32,5 @@ alphanumeric object must be stripped.
 
 ### SOLUTION
 1. Run ```npm install```
-2. Run ```npm start``` and wait for awhile for it to generate the output
+2. Run ```npm start``` and wait for awhile for it to generate the output in ```output/output.txt```
 3. Set the ```OUTPUT_SIZE (in line 6: writer/program.js)``` to ```10485760 (10MB), 1048576 (1MB), or 1024 (1KB)``` if desired.
