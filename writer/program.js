@@ -1,6 +1,9 @@
 var fs = require('fs')
 var randomstring = require('randomstring')
 var Random = require('random-js')()
+var bytes = require('bytes');
+
+var OUTPUT_SIZE = 10485760 // 10485760 finalsize (10MB)
 
 var genAlphabeticString = function(limit) {
   return randomstring.generate({
@@ -11,7 +14,10 @@ var genAlphabeticString = function(limit) {
 }
 
 var genRealNumber = function(limit) {
-  return Random.real(-limit, limit)
+  // limit is the length of the number, not the value
+  var realNumber = Random.real(-limit, limit)
+  var fixedDecimal = Random.integer(0, 18)
+  return realNumber.toFixed(fixedDecimal)
 }
 
 var genInteger = function(limit) {
@@ -29,29 +35,47 @@ var genAlphanumeric = function(limit) {
     length: limit,
     charset: 'alphanumeric'
   });
-  return randSpace + alphanumeric + randSpace
+
+  // limit length
+  alphanumeric = randSpace + alphanumeric + randSpace
+  return alphanumeric.slice(0, limit)
 }
 
 var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAlphanumeric) {
-  var limit = 100 // 1000000 = 10 MB
+
+
+
   var randomizers = [genAlphabeticString, genRealNumber, genInteger, genAlphanumeric]
   var finalOutput = []
-  console.log('generating main file..')
+  var iterator = 0
+  console.log('Generating output file, please be patient..')
 
-    for (i = limit; i >= 0; i--) {
-      var randomize = Random.integer(0, 3)
-      var item = randomizers[randomize](limit)
-      console.log('randomizing item..', i, item)
-      while (finalOutput.toString().length <= 1000000) {
-        finalOutput.push(item)
-      }
+  while (finalOutput.toString().length < OUTPUT_SIZE) {
+    var limit = Random.integer(0, 100) // limit of each items (can be set to remaining filesize)
+    var actualLength = finalOutput.toString().length
+    var diff = OUTPUT_SIZE - actualLength - 1
+    if (diff == 0) {
+      return
     }
 
-    console.log('finalOutput length:',finalOutput.toString().length)
-    fs.writeFile('./output/output.txt', finalOutput, function(err, content) {
-      if (err) throw console.error('Error writing output', err);
-      console.log('It\'s saved!')
-    })
+    limit = (limit > diff) ? diff : limit
+
+    var randomize = Random.integer(0, 3)
+    var item = randomizers[randomize](limit)
+
+    while (item.toString().length > limit) {
+      var randomize = Random.integer(0, 3)
+      var item = randomizers[randomize](limit)
+    }
+    finalOutput.push(item)
+  }
+
+
+  console.log('Final output size is:', bytes(finalOutput.toString().length))
+  fs.writeFile('./output/output.txt', finalOutput, function(err, content) {
+    if (err) throw console.error('Error writing output', err);
+    console.log('It\'s saved!')
+  })
 }
 
 genMainFile(genAlphabeticString, genRealNumber, genInteger, genAlphanumeric)

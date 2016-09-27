@@ -9,7 +9,8 @@
   },
   "author": "izaak",
   "license": "ISC",
-  "dependencies": {    
+  "dependencies": {
+    "bytes": "^2.4.0",
     "random-js": "^1.0.8",
     "randomstring": "^1.1.5"
   }
