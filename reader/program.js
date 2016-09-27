@@ -68,8 +68,6 @@ var evaluator = {
   }
 }
 
-var genResultFile = function(isAlphabeticString, isAlphaNumeric, isRealNumber, isInteger) {}
-
 fs.readFile('./output/output.txt', 'utf8', function(err, content) {
   if (err) throw console.error('Error writing output', err);
 
@@ -82,6 +80,6 @@ fs.readFile('./output/output.txt', 'utf8', function(err, content) {
 
   fs.writeFile('./output/result.txt', evaluatedArr, function(err, content) {
     if (err) throw console.error('Error writing evaluation', err);
-    console.log('It\'s evaluated!')
+    console.log('It\'s evaluated in /output/result.txt!')
   })
 })

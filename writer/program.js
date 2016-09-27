@@ -65,7 +65,7 @@ var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAl
     var randomize = Random.integer(0, 3)
     var item = randomizers[randomize](limit)
 
-    while (item.toString().length > limit) {
+    while (limit != 0 && item.toString().length > limit) {
       var randomize = Random.integer(0, 3)
       var item = randomizers[randomize](limit)
     }
@@ -75,7 +75,7 @@ var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAl
   console.log('Final output size is:', bytes(finalOutput.toString().length))
   fs.writeFile('./output/output.txt', finalOutput, function(err, content) {
     if (err) throw console.error('Error writing output', err);
-    console.log('It\'s saved!')
+    console.log('It\'s saved in /output/output.txt!')
   })
 }
 
