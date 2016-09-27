@@ -76,6 +76,7 @@ fs.readFile('./output/output.txt', 'utf8', function(err, content) {
   _.forEach(contentArr, function(item) {
     var result = evaluator.isAlphaNumeric(item).isAlphabeticString().isRealNumber().isInteger()
     evaluatedArr.push(result.result)
+    console.log(result.result)
   })
 
   fs.writeFile('./output/result.txt', evaluatedArr, function(err, content) {
