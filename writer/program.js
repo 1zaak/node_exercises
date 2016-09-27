@@ -3,9 +3,9 @@ var randomstring = require('randomstring')
 var Random = require('random-js')()
 var bytes = require('bytes');
 
-
 var OUTPUT_SIZE = 10485760 // 10485760 (10MB), 1048576 (1MB), 1024 (1KB)
 
+// Random alphabetic generator
 var genAlphabeticString = function(limit) {
   return randomstring.generate({
     // to generate limited length based on remaining filesize
@@ -14,6 +14,7 @@ var genAlphabeticString = function(limit) {
   });
 }
 
+// Random real number generator
 var genRealNumber = function(limit) {
   // limit is the length of the number, not the value
   var realNumber = Random.real(-limit, limit)
@@ -21,10 +22,12 @@ var genRealNumber = function(limit) {
   return realNumber.toFixed(fixedDecimal)
 }
 
+// Random integer generator
 var genInteger = function(limit) {
   return Random.integer(1, limit)
 }
 
+// Random alphanumeric generator
 var genAlphanumeric = function(limit) {
   // For generating random amount of spaces before and after
   String.prototype.repeat = function() {
@@ -42,10 +45,8 @@ var genAlphanumeric = function(limit) {
   return alphanumeric.slice(0, limit)
 }
 
+// Generate main output
 var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAlphanumeric) {
-
-
-
   var randomizers = [genAlphabeticString, genRealNumber, genInteger, genAlphanumeric]
   var finalOutput = []
   var iterator = 0
@@ -59,6 +60,7 @@ var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAl
       return
     }
 
+    // Don't exceed length of generated items
     limit = (limit > diff) ? diff : limit
 
     var randomize = Random.integer(0, 3)
@@ -70,7 +72,6 @@ var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAl
     }
     finalOutput.push(item)
   }
-
 
   console.log('Final output size is:', bytes(finalOutput.toString().length))
   fs.writeFile('./output/output.txt', finalOutput, function(err, content) {
