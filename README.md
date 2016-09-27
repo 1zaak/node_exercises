@@ -34,3 +34,4 @@ alphanumeric object must be stripped.
 1. Run ```npm install```
 2. Run ```npm start``` and wait for awhile for it to generate the output in ```output/output.txt```
 3. Set the ```OUTPUT_SIZE (in line 6: writer/program.js)``` to ```10485760 (10MB), 1048576 (1MB), or 1024 (1KB)``` if desired.
+4. Run ```npm run read``` and wait for awhile for it to generate the output in ```output/result.txt```

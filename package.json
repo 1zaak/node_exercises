@@ -5,12 +5,14 @@
   "main": "./writer/program.js",
   "scripts": {
     "test": "npm test",
-    "start": "node ./writer/program.js"
+    "start": "node ./writer/program.js",
+    "read": "node ./reader/program.js"
   },
   "author": "izaak",
   "license": "ISC",
   "dependencies": {
     "bytes": "^2.4.0",
+    "lodash": "^4.16.2",
     "random-js": "^1.0.8",
     "randomstring": "^1.1.5"
   }
