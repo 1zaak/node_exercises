@@ -49,7 +49,7 @@ var genMainFile = function(genAlphabeticString, genRealNumber, genInteger, genAl
   var randomizers = [genAlphabeticString, genRealNumber, genInteger, genAlphanumeric]
   var finalOutput = []
   var iterator = 0
-  console.log('Generating output file, please be patient..')
+  console.log('Generating output file of size ' + bytes(OUTPUT_SIZE) + ', please be patient..')
 
   while (finalOutput.toString().length < OUTPUT_SIZE) {
     var limit = Random.integer(0, 100) // limit of each items (can be set to remaining filesize)
