@@ -3,7 +3,7 @@ var randomstring = require('randomstring')
 var Random = require('random-js')()
 var bytes = require('bytes');
 
-var OUTPUT_SIZE = 10485760 // 10485760 finalsize (10MB)
+var OUTPUT_SIZE = 10485760 // 10485760 (10MB), 1048576 (1MB), 1024 (1KB)
 
 var genAlphabeticString = function(limit) {
   return randomstring.generate({
